@@ -33,3 +33,50 @@ Delete from AddressBookData where firstName='E';
 
 --UC6
 select * from AddressBookData where city='Hydreabad';
+select * from AddressBookData where state='Ap';
+
+--UC7
+select COUNT(*),city from AddressBookData Group By city;
+select COUNT(*),state from AddressBookData Group By state;
+
+--UC8
+select Id,firstName from AddressBookData where city='Vizag' Order By firstName; 
+
+--UC9
+Alter table AddressBookData add type varchar(10);
+Update AddressBookData set type='Friend' where firstName='Ganesh';
+Update AddressBookData set type='Family' where firstName='A';
+Update AddressBookData set type='Profession' where firstName='C';
+Update AddressBookData set type='Friend' where firstName='G';
+Update AddressBookData set type='Family' where firstName='I';
+
+--UC10
+select count(*),type from AddressBookData Group By type;
+
+--UC11
+Alter Table AddressBookData Drop Column type;
+Create table Type(
+typeId int identity(1,1) primary key,
+typeName varchar(10),
+);
+Insert into Type values('Family');
+Insert into Type values('Friend');
+Insert into Type values('Profession');
+
+select * from Type;
+
+--UC12
+Alter table AddressBookData add typeId int foreign key references Type;
+Update AddressBookData set typeId=1 where firstName='Ganesh';
+Update AddressBookData set typeId=2 where firstName='A';
+Update AddressBookData set typeId=2 where firstName='C';
+Update AddressBookData set typeId=1 where firstName='G';
+Update AddressBookData set typeId=3 where firstName='I';
+
+--UC13
+select * from AddressBookData where city='Hydreabad';
+select * from AddressBookData where state='Ap';
+select COUNT(*),city from AddressBookData Group By city;
+select COUNT(*),state from AddressBookData Group By state;
+select Id,firstName from AddressBookData where city='Vizag' Order By firstName; 
+select count(*),typeId from AddressBookData Group By typeId;
